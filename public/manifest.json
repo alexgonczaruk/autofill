@@ -1,14 +1,14 @@
 {
   "name": "v1 fill",
-  "version": "1.0.0",
-  "manifest_version": 2,
   "description": "lets go boys",
-  "icons": {
-      "512": "v1.jpeg"
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
   },
-  "browser_action": {
-      "default_icon": "v1.jpeg",
-      "default_popup": "popup.html"
-  },
-  "permissions": ["storage"]
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "v1.jpeg"
+  }
 }

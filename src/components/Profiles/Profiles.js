@@ -25,7 +25,7 @@ function Profiles() {
                     <input autoComplete="nahhhh" placeholder="Smith"></input>
                 </div>
                 <div className="form-input short">
-                    <label>Phone Number</label>
+                    <label>Phone</label>
                     <input autoComplete="nahhhh" placeholder="1112223333"></input>
                 </div>
                 <div className="form-input long">
@@ -53,7 +53,7 @@ function Profiles() {
                     <input autoComplete="nahhhh" placeholder="NY"></input>
                 </div>
                 <div className="form-input short">
-                    <label>Zip/Postal Code</label>
+                    <label>Zip Code</label>
                     <input autoComplete="nahhhh" placeholder="12345"></input>
                 </div>
                 <div className="form-input long">

@@ -99,7 +99,7 @@ form {
 input {
   display: block;
   border-radius: 5px;
-  height: 20px;
+  /* height: 20px; */
   border: 0px;
   background: rgb(44, 39, 66);
   padding: 0.25em;
@@ -109,26 +109,27 @@ input {
 }
 
 .short {
-  width: 8em;
-}
-
-.medium {
   width: 10em;
 }
 
-.long {
+.medium {
   width: 12em;
 }
 
-.form-input {
-  padding: 0.4em;
-  
-  height: 3em;
+.long {
+  width: 14em;
 }
 
-/* label {
-  padding: 1em 1em;
-} */
+.form-input {
+  padding: 7.5px;
+  
+  /* height: 3em; */
+}
+
+label {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
