@@ -4,7 +4,7 @@ import './Toggle.scss';
 class Toggle extends Component {
     render() {
         return (
-            <div className="toggle-switch">
+            <div className="toggle-switch small-switch">
                 <input
                     type="checkbox"
                     className="toggle-switch-checkbox"
