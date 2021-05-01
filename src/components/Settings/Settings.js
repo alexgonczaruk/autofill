@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import BestBuyCA from './BestBuyCA';
+import Shopify from './Shopify';
+import WalmartCA from './WalmartCA';
 
 function Settings() {
   return (
-    <div className="">
-        settings page
-    </div>
+    <>
+      <Shopify />
+      <BestBuyCA />
+      <WalmartCA />
+    </>
   );
 }
 

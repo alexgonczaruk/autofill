@@ -9,10 +9,12 @@
     "faker": "^5.5.3",
     "jest": "^26.6.0",
     "jest-cli": "^26.6.3",
+    "node-sass": "^5.0.0",
     "puppeteer": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "react-switch": "^6.0.0",
     "styled-components": "^5.2.3",
     "web-vitals": "^1.0.1"
   },
@@ -21,7 +23,7 @@
     "build": "./script/build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-},
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
