@@ -18,7 +18,7 @@ function Shopify() {
         let oldConfig = { ...config };
         oldConfig[value] = event.target.checked;
         setConfig(oldConfig);
-        chrome.storage.sync.set({ oldConfig });
+        chrome.storage.sync.set({ config: oldConfig });
     }
     return (
         <div className="shopify">
