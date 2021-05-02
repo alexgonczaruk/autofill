@@ -82,7 +82,10 @@ header {
 .profiles,
 .settings {
   width: 650px;
-  height: 350px;
+}
+
+.profiles {
+  height: 370px;
 }
 
 form {

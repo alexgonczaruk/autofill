@@ -1,80 +1,118 @@
-import React from 'react'
-// import Dropdown from './Dropdown'
+import React, { useState, useEffect } from 'react'
+/*global chrome*/
 
 function Profiles() {
+    const [profile, setProfile] = useState({
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        address1: '',
+        address2: '',
+        city: '',
+        country: '',
+        province: '',
+        postalCode: '',
+        cardNumber: '',
+        expiration: '',
+        securityCode: '',
+        cardType: ''
+    })
 
-    // let options = ["Profile 1", "Profile 2"]
+    useEffect(() => {
+        chrome.storage.sync.get(['profile'], function(result) {
+            console.log(result.profile)
+            setProfile(result.profile)
+        })
+    }, [])
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        chrome.storage.sync.set({ profile })
+    }
+
+    const editProfile = (e, value) => {
+        let oldProfile = { ...profile }
+        oldProfile[value] = e.target.value
+        setProfile(oldProfile)
+    }
+
     return (
         <div className="profiles">
-            {/* <div className="profile-dropdown">
-                <Dropdown options={options} />
-            </div>
-            <div>
-                <button className="profileButton delete"></button>
-                <button className="profileButton edit"></button>
-                <button className="profileButton create"></button>
-            </div>*/}
-
-            <form autoComplete="disabled!">
+            <form onSubmit={handleSubmit}>
                 <div className="form-input short">
                     <label>First Name</label>
-                    <input autoComplete="nahhhh" placeholder="John"></input>
+                    <input autoComplete="nahhhh" placeholder="John" value={profile ? profile.firstName: ''}
+                        onChange={e => editProfile(e, "firstName")} />
                 </div>
                 <div className="form-input short">
                     <label>Last Name</label>
-                    <input autoComplete="nahhhh" placeholder="Smith"></input>
+                    <input autoComplete="nahhhh" placeholder="Smith" value={profile ? profile.lastName: ''}
+                        onChange={e => editProfile(e, "lastName")} />
                 </div>
                 <div className="form-input short">
                     <label>Phone</label>
-                    <input autoComplete="nahhhh" placeholder="1112223333"></input>
+                    <input autoComplete="nahhhh" placeholder="1112223333" value={profile ? profile.phone: ''}
+                        onChange={e => editProfile(e, "phone")} />
                 </div>
                 <div className="form-input long">
                     <label>Email</label>
-                    <input autoComplete="nahhhh" placeholder="user@gmail.com"></input>
+                    <input autoComplete="nahhhh" placeholder="user@gmail.com" value={profile ? profile.email: ''}
+                        onChange={e => editProfile(e, "email")} />
                 </div>
                 <div className="form-input medium">
                     <label>Address 1</label>
-                    <input autoComplete="nahhhh" placeholder="1 Main Street"></input>
+                    <input autoComplete="nahhhh" placeholder="1 Main Street" value={profile ? profile.address1: ''}
+                        onChange={e => editProfile(e, "address1")} />
                 </div>
                 <div className="form-input short">
                     <label>Address 2</label>
-                    <input autoComplete="nahhhh" placeholder="Unit 1"></input>
+                    <input autoComplete="nahhhh" placeholder="Unit 1" value={profile ? profile.address2: ''}
+                        onChange={e => editProfile(e, "address2")} />
                 </div>
                 <div className="form-input medium">
                     <label>City</label>
-                    <input autoComplete="nahhhh" placeholder="Toronto"></input>
+                    <input autoComplete="nahhhh" placeholder="Toronto" value={profile ? profile.city: ''}
+                        onChange={e => editProfile(e, "city")} />
                 </div>
                 <div className="form-input medium">
                     <label>Country</label>
-                    <input autoComplete="nahhhh" placeholder="United States"></input>
+                    <input autoComplete="nahhhh" placeholder="United States" value={profile ? profile.country: ''}
+                        onChange={e => editProfile(e, "country")} />
                 </div>
                 <div className="form-input short">
                     <label>State/Province</label>
-                    <input autoComplete="nahhhh" placeholder="NY"></input>
+                    <input autoComplete="nahhhh" placeholder="NY" value={profile ? profile.province: ''}
+                        onChange={e => editProfile(e, "province")} />
                 </div>
                 <div className="form-input short">
                     <label>Zip Code</label>
-                    <input autoComplete="nahhhh" placeholder="12345"></input>
+                    <input autoComplete="nahhhh" placeholder="12345" value={profile ? profile.postalCode: ''}
+                        onChange={e => editProfile(e, "postalCode")} />
                 </div>
                 <div className="form-input long">
                     <label>Card Number</label>
-                    <input autoComplete="nahhhh" placeholder="1111222233334444"></input>
+                    <input autoComplete="nahhhh" placeholder="1111222233334444" value={profile ? profile.cardNumber: ''}
+                        onChange={e => editProfile(e, "cardNumber")} />
                 </div>
                 <div className="form-input short">
                     <label>Expiration</label>
-                    <input autoComplete="nahhhh" placeholder="12/25"></input>
+                    <input autoComplete="nahhhh" placeholder="12/25" value={profile ? profile.expiration: ''}
+                        onChange={e => editProfile(e, "expiration")} />
                 </div>
                 <div className="form-input short">
                     <label>Security Code</label>
-                    <input autoComplete="nahhhh" placeholder="123"></input>
+                    <input autoComplete="nahhhh" placeholder="123" value={profile ? profile.securityCode: ''}
+                        onChange={e => editProfile(e, "securityCode")} />
                 </div>
                 <div className="form-input medium">
                     <label>Card Type</label>
-                    <input autoComplete="nahhhh" placeholder="MasterCard"></input>
+                    <input autoComplete="nahhhh" placeholder="MasterCard" value={profile ? profile.cardType: ''}
+                        onChange={e => editProfile(e, "cardType")} />
                 </div>
                 <div className="form-input medium">
                     <label>Finish</label>
-                    <button className="form-submit">Submit</button>
+                    <button className="form-submit" type="submit" value="submit">Submit</button>
                 </div>
             </form>
         </div>
