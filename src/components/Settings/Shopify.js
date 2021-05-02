@@ -4,31 +4,31 @@ import Toggle from './Toggle';
 import './Shopify.css';
 
 function Shopify() {
-    const [config, setConfig] = useState({
-        ac: false,
-        cp: false,
-        fc: false
+    const [sConfig, setSConfig] = useState({
+        sac: false,
+        scp: false,
+        sfc: false
     });
     useEffect(() => {
-        chrome.storage.sync.get(['config'], function (result) {
-            setConfig(result.config);
+        chrome.storage.sync.get(['sConfig'], function (result) {
+            setSConfig(result.sConfig);
         });
     }, [])
-    const configChangeHandler = (event, value) => {
-        let oldConfig = { ...config };
-        oldConfig[value] = event.target.checked;
-        setConfig(oldConfig);
-        chrome.storage.sync.set({ config: oldConfig });
+    const sConfigChangeHandler = (event, value) => {
+        let oldSConfig = { ...sConfig };
+        oldSConfig[value] = event.target.checked;
+        setSConfig(oldSConfig);
+        chrome.storage.sync.set({ sConfig: oldSConfig });
     }
     return (
         <div className="shopify">
             <h2 className="shopify__description">Shopify</h2>
             <p className="shopify__controls">Auto Checkout</p>
-            <Toggle Name="ShopifyAutoCheckout" checked={config ? config.ac : false} onChange={e => configChangeHandler(e, "ac")} />
+            <Toggle Name="ShopifyAutoCheckout" checked={sConfig ? sConfig.sac : false} onChange={e => sConfigChangeHandler(e, "sac")} />
             <p className="shopify__controls">Complete Payment</p>
-            <Toggle Name="ShopifyCompletePayment" checked={config ? config.cp : false} onChange={e => configChangeHandler(e, "cp")} />
+            <Toggle Name="ShopifyCompletePayment" checked={sConfig ? sConfig.scp : false} onChange={e => sConfigChangeHandler(e, "scp")} />
             <p className="shopify__controls">Force Captcha</p>
-            <Toggle Name="ShopifyForceCaptcha" checked={config ? config.fc : false} onChange={e => configChangeHandler(e, "fc")} />
+            <Toggle Name="ShopifyForceCaptcha" checked={sConfig ? sConfig.sfc : false} onChange={e => sConfigChangeHandler(e, "sfc")} />
         </div>
     );
 }
