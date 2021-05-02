@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <img className="logo" src="v1.jpeg" alt="logo"/>
+        <img className="logo" src="v1.png" alt="logo"/>
         <div className="header-bar">
           <div className={page === "Settings" ? "header-page-active" : "header-page-inactive"} onClick={() => pageHandler("Settings")}>Settings</div>
           <div className={page === "Profiles" ? "header-page-active" : "header-page-inactive"} onClick={() => pageHandler("Profiles")}>Profiles</div>
