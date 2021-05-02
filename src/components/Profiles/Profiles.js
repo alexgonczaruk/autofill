@@ -111,7 +111,7 @@ function Profiles() {
                         onChange={e => editProfile(e, "cardType")} />
                 </div>
                 <div className="form-input medium">
-                    <label>Finish</label>
+                    <label>Submit</label>
                     <button className="form-submit" type="submit" value="submit">Submit</button>
                 </div>
             </form>
