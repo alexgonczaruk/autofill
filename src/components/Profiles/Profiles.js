@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 /*global chrome*/
 
 function Profiles() {
+    const [saved, setSaved] = useState(false)
+
     const [profile, setProfile] = useState({
         firstName: '',
         lastName: '',
@@ -21,7 +23,6 @@ function Profiles() {
 
     useEffect(() => {
         chrome.storage.sync.get(['profile'], function(result) {
-            console.log(result.profile)
             setProfile(result.profile)
         })
     }, [])
@@ -29,12 +30,14 @@ function Profiles() {
     const handleSubmit = (event) => {
         event.preventDefault()
         chrome.storage.sync.set({ profile })
+        setSaved(true)
     }
 
     const editProfile = (e, value) => {
         let oldProfile = { ...profile }
         oldProfile[value] = e.target.value
         setProfile(oldProfile)
+        setSaved(false)
     }
 
     return (
@@ -111,8 +114,7 @@ function Profiles() {
                         onChange={e => editProfile(e, "cardType")} />
                 </div>
                 <div className="form-input medium">
-                    <label>Submit</label>
-                    <button className="form-submit" type="submit" value="submit">Submit</button>
+                    <button className="form-submit" type="submit" value="submit">{saved ? "Profile Saved!" : "Save Profile"}</button>
                 </div>
             </form>
         </div>
