@@ -12,6 +12,29 @@
     "default_icon": "v1.png"
   },
   "icons": {
-    "16": "v1.png"
-  }
+    "16": "v1.png",
+    "48": "v1.png",
+    "128": "v1.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*/checkouts/*"],
+      "js": ["websites/shopify.js"]
+    },
+    {
+      "matches": ["https://*.shopifycs.com/*"],
+      "js": ["websites/shopify-pay.js"],
+      "all_frames": true
+    },
+    {
+      "matches": ["https://*.com/checkout/*"],
+      "js": ["websites/wmca.js"],
+      "all_frames": true
+    },
+    {
+      "matches": ["https://bestbuy.ca/checkout/*"],
+      "js": ["websites/bbca.js"],
+      "all_frames": true
+    }
+  ]
 }
