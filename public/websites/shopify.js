@@ -90,9 +90,9 @@ let profile;
 // })
 window.onload = function () {
 	chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
-        console.log('shopify.js running')
         profile = result.profile
         sConfig = result.sConfig
+        console.log('shopify.js running', result)
     
 		if (sConfig.sac) {
 			if (profile) {
@@ -130,13 +130,15 @@ window.onload = function () {
 
 					console.log(hasCaptcha());
 					
-
+                    console.log(hasCaptcha(), sConfig.sfc)
 					if (sConfig.sac) {
 						if (!hasCaptcha()) {
 							continueToNextStep();
 						} else if (hasCaptcha && sConfig.sfc) {
+                            console.log('HI GUYS!')
                             let captchaButton = document.querySelector('.g-recaptcha')
                             captchaButton.click()
+                            // document.querySelector('#recaptcha-anchor').click()
                         }
 					}
 				} else if (currentStep() === 'shipping_method') {
@@ -149,13 +151,19 @@ window.onload = function () {
 	});
 }
 
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {	
-	if (request.action === 'completeCheckout' && sConfig.scp) {
-		let completeCheckout = setTimeout(() => {
-			continueToNextStep();
-			clearTimeout(completeCheckout);
-		}, 1000)
-	}
+    let newConfig;
+    chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
+        profile = result.profile
+        newConfig = result.sConfig
+        console.log(result, "THIS IS THE RESULT BEFORE CONDITION")
+        console.log('AT THE CONDITION')
+        if (request.action === 'completeCheckout' && newConfig.scp) {
+            console.log('ENTERED THE CONDITION')
+            continueToNextStep();
+        }
+    })
 });
 
 const currentStep = () => {
