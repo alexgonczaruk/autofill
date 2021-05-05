@@ -85,11 +85,11 @@
 
 let sConfig;
 let profile;
-// chrome.storage.sync.get(['profile'], function(result) {
+// chrome.storage.local.get(['profile'], function(result) {
 //     console.log(result, result.profile)
 // })
 window.onload = function () {
-	chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
+	chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         profile = result.profile
         sConfig = result.sConfig
         console.log('shopify.js running', result)
@@ -128,14 +128,12 @@ window.onload = function () {
 					fillField('#checkout_billing_address_country', profile.country, true);
 					fillField('#checkout_billing_address_province', profile.province, true);
 
-					console.log(hasCaptcha());
 					
                     console.log(hasCaptcha(), sConfig.sfc)
 					if (sConfig.sac) {
 						if (!hasCaptcha()) {
 							continueToNextStep();
 						} else if (hasCaptcha && sConfig.sfc) {
-                            console.log('HI GUYS!')
                             let captchaButton = document.querySelector('.g-recaptcha')
                             captchaButton.click()
                             // document.querySelector('#recaptcha-anchor').click()
@@ -154,13 +152,10 @@ window.onload = function () {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {	
     let newConfig;
-    chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
+    chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         profile = result.profile
         newConfig = result.sConfig
-        console.log(result, "THIS IS THE RESULT BEFORE CONDITION")
-        console.log('AT THE CONDITION')
         if (request.action === 'completeCheckout' && newConfig.scp) {
-            console.log('ENTERED THE CONDITION')
             continueToNextStep();
         }
     })

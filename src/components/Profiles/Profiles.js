@@ -22,14 +22,14 @@ function Profiles() {
     })
 
     useEffect(() => {
-        chrome.storage.sync.get(['profile'], function(result) {
+        chrome.storage.local.get(['profile'], function(result) {
             setProfile(result.profile)
         })
     }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        chrome.storage.sync.set({ profile })
+        chrome.storage.local.set({ profile })
         setSaved(true)
     }
 

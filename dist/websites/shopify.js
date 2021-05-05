@@ -85,11 +85,11 @@
 
 let sConfig;
 let profile;
-// chrome.storage.sync.get(['profile'], function(result) {
+// chrome.storage.local.get(['profile'], function(result) {
 //     console.log(result, result.profile)
 // })
 window.onload = function () {
-	chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
+	chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         profile = result.profile
         sConfig = result.sConfig
         console.log('shopify.js running', result)
@@ -138,6 +138,7 @@ window.onload = function () {
                             console.log('HI GUYS!')
                             let captchaButton = document.querySelector('.g-recaptcha')
                             captchaButton.click()
+                            // document.querySelector('#recaptcha-anchor').click()
                         }
 					}
 				} else if (currentStep() === 'shipping_method') {
@@ -153,7 +154,7 @@ window.onload = function () {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {	
     let newConfig;
-    chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
+    chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         profile = result.profile
         newConfig = result.sConfig
         console.log(result, "THIS IS THE RESULT BEFORE CONDITION")

@@ -10,7 +10,7 @@ function WalmartCA() {
         wfc: false
     });
     useEffect(() => {
-        chrome.storage.sync.get(['wConfig'], function (result) {
+        chrome.storage.local.get(['wConfig'], function (result) {
             setWConfig(result.wConfig);
         });
     }, [])
@@ -18,7 +18,7 @@ function WalmartCA() {
         let oldWConfig = { ...wConfig };
         oldWConfig[value] = event.target.checked;
         setWConfig(oldWConfig);
-        chrome.storage.sync.set({ wConfig: oldWConfig });
+        chrome.storage.local.set({ wConfig: oldWConfig });
     }
     return (
         <div className="wmca">

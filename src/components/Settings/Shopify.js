@@ -10,7 +10,7 @@ function Shopify() {
         sfc: false
     });
     useEffect(() => {
-        chrome.storage.sync.get(['sConfig'], function (result) {
+        chrome.storage.local.get(['sConfig'], function (result) {
             setSConfig(result.sConfig);
         });
     }, [])
@@ -18,7 +18,7 @@ function Shopify() {
         let oldSConfig = { ...sConfig };
         oldSConfig[value] = event.target.checked;
         setSConfig(oldSConfig);
-        chrome.storage.sync.set({ sConfig: oldSConfig });
+        chrome.storage.local.set({ sConfig: oldSConfig });
     }
     return (
         <div className="shopify">

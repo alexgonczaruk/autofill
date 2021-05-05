@@ -3,7 +3,7 @@ let sConfig;
 let profile;
 
 window.onload = function () {
-	chrome.storage.sync.get(['profile', 'sConfig'], function(result) {
+	chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         console.log('shopify-pay.js running')
         profile = result.profile
         sConfig = result.sConfig

@@ -10,7 +10,7 @@ function BestBuyCA() {
         bfc: false
     });
     useEffect(() => {
-        chrome.storage.sync.get(['bConfig'], function (result) {
+        chrome.storage.local.get(['bConfig'], function (result) {
             setBConfig(result.bConfig);
         });
     }, [])
@@ -18,7 +18,7 @@ function BestBuyCA() {
         let oldBConfig = { ...bConfig };
         oldBConfig[value] = event.target.checked;
         setBConfig(oldBConfig);
-        chrome.storage.sync.set({ bConfig: oldBConfig });
+        chrome.storage.local.set({ bConfig: oldBConfig });
     }
     return (
         <div className="bbca">
