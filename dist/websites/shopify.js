@@ -128,14 +128,12 @@ window.onload = function () {
 					fillField('#checkout_billing_address_country', profile.country, true);
 					fillField('#checkout_billing_address_province', profile.province, true);
 
-					console.log(hasCaptcha());
 					
                     console.log(hasCaptcha(), sConfig.sfc)
 					if (sConfig.sac) {
 						if (!hasCaptcha()) {
 							continueToNextStep();
 						} else if (hasCaptcha && sConfig.sfc) {
-                            console.log('HI GUYS!')
                             let captchaButton = document.querySelector('.g-recaptcha')
                             captchaButton.click()
                             // document.querySelector('#recaptcha-anchor').click()
@@ -143,6 +141,12 @@ window.onload = function () {
 					}
 				} else if (currentStep() === 'shipping_method') {
 					if (sConfig.sac) {
+                        while(document.querySelector('.step__footer__continue-btn').disabled) {
+                            if (!document.querySelector('.step__footer__continue-btn').disabled) {
+                                break
+                            }
+                        }
+                        
 						continueToNextStep();
 					}
 				}
@@ -157,10 +161,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         profile = result.profile
         newConfig = result.sConfig
-        console.log(result, "THIS IS THE RESULT BEFORE CONDITION")
-        console.log('AT THE CONDITION')
         if (request.action === 'completeCheckout' && newConfig.scp) {
-            console.log('ENTERED THE CONDITION')
             continueToNextStep();
         }
     })

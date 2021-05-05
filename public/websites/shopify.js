@@ -141,6 +141,12 @@ window.onload = function () {
 					}
 				} else if (currentStep() === 'shipping_method') {
 					if (sConfig.sac) {
+                        while(document.querySelector('.step__footer__continue-btn').disabled) {
+                            if (!document.querySelector('.step__footer__continue-btn').disabled) {
+                                break
+                            }
+                        }
+                        
 						continueToNextStep();
 					}
 				}
