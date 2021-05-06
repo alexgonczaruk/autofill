@@ -83,13 +83,27 @@
 //   }
 // };
 
+// import CryptoJS from 'crypto-js'
 let sConfig;
 let profile;
 // chrome.storage.local.get(['profile'], function(result) {
 //     console.log(result, result.profile)
 // })
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const waitForShipping = async () => {
+    while(document.querySelector('.step__footer__continue-btn').disabled) {
+        await sleep(500)
+    }
+    continueToNextStep()
+}
+
 window.onload = function () {
 	chrome.storage.local.get(['profile', 'sConfig'], function(result) {
+        // let profileVal = CryptoJS.AES.decrypt(result.profile, 'shyboy123')
+        // profileVal = JSON.parse(profileVal.toString(CryptoJS.enc.Utf8))
+
+        // profile = profileVal
         profile = result.profile
         sConfig = result.sConfig
         console.log('shopify.js running', result)
@@ -140,15 +154,7 @@ window.onload = function () {
                         }
 					}
 				} else if (currentStep() === 'shipping_method') {
-					if (sConfig.sac) {
-                        while(document.querySelector('.step__footer__continue-btn').disabled) {
-                            if (!document.querySelector('.step__footer__continue-btn').disabled) {
-                                break
-                            }
-                        }
-                        
-						continueToNextStep();
-					}
+					waitForShipping()
 				}
 			}
 		}
@@ -159,6 +165,10 @@ window.onload = function () {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {	
     let newConfig;
     chrome.storage.local.get(['profile', 'sConfig'], function(result) {
+        // let profileVal = CryptoJS.AES.decrypt(result.profile, 'shyboy123')
+        // profileVal = JSON.parse(profileVal.toString(CryptoJS.enc.Utf8))
+
+        // profile = profileVal
         profile = result.profile
         newConfig = result.sConfig
         if (request.action === 'completeCheckout' && newConfig.scp) {

@@ -1,4 +1,4 @@
-/*global chrome*/
+ /*global chrome*/
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.action === 'completeCheckout') {
 		chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {

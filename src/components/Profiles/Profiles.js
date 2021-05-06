@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+// import CryptoJS from 'crypto-js'
+
 /*global chrome*/
 
 function Profiles() {
@@ -23,12 +25,22 @@ function Profiles() {
 
     useEffect(() => {
         chrome.storage.local.get(['profile'], function(result) {
+            // try{
+            //     let profileVal = CryptoJS.AES.decrypt(result.profile, 'shyboy123')
+            //     profileVal = JSON.parse(profileVal.toString(CryptoJS.enc.Utf8))
+            //     setProfile(profileVal)
+            // } catch(e) {
+            //     console.log('USEEFFECT', e)
+            // }
             setProfile(result.profile)
         })
     }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        // let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(profile), 'shyboy123').toString()
+        // chrome.storage.local.set({ profile: ciphertext })
+        // console.log('HANDLESUBMIT', ciphertext)
         chrome.storage.local.set({ profile })
         setSaved(true)
     }

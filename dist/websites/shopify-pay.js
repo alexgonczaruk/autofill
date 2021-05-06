@@ -1,11 +1,16 @@
 /*global chrome*/
+// import CryptoJS from 'crypto-js'
+
 let sConfig;
 let profile;
 
 window.onload = function () {
 	chrome.storage.local.get(['profile', 'sConfig'], function(result) {
         console.log('shopify-pay.js running')
-        profile = result.profile
+		// let profileVal = CryptoJS.AES.decrypt(result.profile, 'shyboy123')
+        // profileVal = JSON.parse(profileVal.toString(CryptoJS.enc.Utf8))
+        // profile = profileVal
+		profile = result.profile
         sConfig = result.sConfig
 		if (sConfig.sac) {
 			if (profile) {
